@@ -2,6 +2,8 @@ import React from 'react'
 import AllHogData from '../porkers_data'
 import Hog from './Hog'
 
+let dataToDisplay = false
+
 export default class HogList extends React.Component {
 
 
@@ -10,29 +12,31 @@ export default class HogList extends React.Component {
     if(filterSort.nameSort) {
       return AllHogData.sort((hogA, hogB) => {
         return hogA.name.localeCompare(hogB.name)
-        // return(<div className="ui eight wide column"><Hog
-        //   hogData={hog}
-        //   id={index + 1}
-        // /></div>)
+
       })
     } else if (filterSort.weightSort) {
       return AllHogData.sort((hogA, hogB) => {
         return hogA[weight] - hogB[weight]
-        // return(<div className="ui eight wide column"><Hog
-        //   hogData={hog}
-        //   id={index + 1}
-        // /></div>)
+
       })
     }
   }
 
   filterHogs = (filterSort) => {
-
+    if (filterSort.greasedFilter) {
+      dataToDisplay =
+      [...AllHogData].filter(hog => {
+        return hog.greased
+      })
+    } else {
+      dataToDisplay = [...AllHogData]
+    }
+    // return dataToDisplay
   }
 
 
   getAllHogNames = () => {
-    return AllHogData.map((hog, index) => {
+    return dataToDisplay.map((hog, index) => {
       return(<div className="ui eight wide column" key={index+1}><Hog
         hogData={hog}
         id={index + 1}

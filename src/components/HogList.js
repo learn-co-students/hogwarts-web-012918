@@ -14,23 +14,9 @@ constructor(props){
   handleFilterValue = (event) => {
     event.preventDefault()
     let currentValue= event.target.value
-    if (currentValue === 'name') {
-      this.setState({
-        filtered: 'name'
-      })
-    } else if (currentValue === 'weight') {
-      this.setState({
-        filtered: 'weight'
-      })
-    } else if(currentValue === 'greased') {
-      this.setState({
-        filtered: 'greased'
-      })
-    } else {
-      this.setState({
-        filtered: 'all'
-      })
-    }
+    this.setState({
+      filtered: currentValue
+    })
   }
 
   filterHogs = () => {

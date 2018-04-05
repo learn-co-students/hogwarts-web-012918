@@ -8,6 +8,27 @@
   display: inline;
 }
 
+.ui.blue.card {
+  height: auto;
+  width: auto;
+}
+
+.ui.blue.card:hover {
+  transition: all 4s ease-in-out;
+  background-color: pink;
+  transform: scale(8.0);
+}
+
+.hog-images {
+  width: 80%;
+  height: auto;
+}
+
+.hog-images:hover {
+  animation: App-logo-spin infinite 3s linear;
+  background-image: "https://media.giphy.com/media/rdma0nDFZMR32/giphy.gif"
+}
+
 .TwirlyPig:hover {
   transform: scale(1.5);
 }
@@ -64,7 +85,7 @@ ul {
 
 .subtleText {
   color: #D1D1D1;
-  font-size: .75em; 
+  font-size: .75em;
 }
 
 

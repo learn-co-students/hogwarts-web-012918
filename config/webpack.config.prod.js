@@ -4,7 +4,37 @@ const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin')
+
+module.exports = {
+  entry : './src/app.js',
+  output : {
+    path : './dist',
+    filename : 'app.bundle.js'
+  },
+  plugins : [
+  new ExtractTextWebpackPlugin('app.bundle.css')],
+  module : {
+    rules : [{
+      test : /\.css$/,
+      use : ExtractTextWebpackPlugin.extract({
+        fallback : 'style-loader',
+        use: 'css-loader'
+      })
+    },{
+      test: /\.js$/,
+      exclude: /(node_modules)/,
+      loader: 'babel-loader',
+      query: {
+        presets: ['react','es2015']
+      }
+    },{
+      test : /\.jpg$/,
+      exclude: /(node_modules)/,
+      loader : 'file-loader'
+    }]
+  }
+}
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
@@ -84,7 +114,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.js', '.json', '.jsx'],
     alias: {
-      
+
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -114,7 +144,7 @@ module.exports = {
           {
             options: {
               formatter: eslintFormatter,
-              
+
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -160,7 +190,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: require.resolve('babel-loader'),
-        
+
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
